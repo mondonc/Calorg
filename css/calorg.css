@@ -1,0 +1,126 @@
+
+body {
+
+	font-size: 13px;
+	padding-top: 0px;
+	margin-top: 0px;
+	font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+
+}
+
+
+#cal_headers {
+
+	z-index: 9999;
+	margin-top: 0px;
+	overflow:hidden;
+	position:fixed;
+	transition-duration: 0.3s;   
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;  
+
+}
+
+
+#cal_footer {
+
+	z-index: 9999;
+	margin-bottom: 0px;
+	overflow:hidden;
+	position:fixed;
+	bottom: 0;
+	transition-duration: 0.3s;   
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;  
+
+}
+
+
+#external-events {
+	padding-right: 5px;
+	border: 1px solid #ccc;
+	z-index: 9999;
+	margin-top: 60px;
+	overflow:hidden;
+	padding-top: 30px;
+	width:100px;    
+	position:fixed;
+	left:-70px;                  
+	background-color: #EEE;
+	text-align: right;
+	transition-duration: 0.3s;   
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;  
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+
+}
+#external-events:hover  {  
+	left:0px;  
+}
+
+.external-event { /* try to mimick the look of a real event */
+	margin: 10px 0;
+	padding: 2px 4px;
+	background: #3366CC;
+	color: #fff;
+	font-size: .85em;
+	cursor: pointer;
+}
+
+#external-events p {
+	margin: 1.5em 0;
+	font-size: 11px;
+	color: #666;
+}
+
+#external-events p input {
+	margin: 0;
+	vertical-align: middle;
+}
+
+#prompt {
+
+	z-index: 9999;
+	margin-top: 0px;
+	overflow:hidden;
+	position:fixed;
+	left: 50%;
+	border: 1px solid #ccc;
+	height: 100px;
+	width: 400px;
+	background-color: #EEE;
+	margin-left: -200px;
+	margin-top: -150px;
+	transition-duration: 0.3s;   
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;  
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+
+}
+
+
+#calendar {
+	margin-left: 30px;
+}
+
+.fc-content {
+	clear: none;
+}
+
+#div_password {
+	float: center;
+	text-align: center;
+	margin-top: 20px;
+}
+
+

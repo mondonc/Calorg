@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<link rel='stylesheet' type='text/css' href='fullcalendar/fullcalendar.css' />
+		<link rel='stylesheet' type='text/css' href='fullcalendar/fullcalendar.print.css' media='print' />
+		<link rel='stylesheet' type='text/css' href='css/jquery-ui-timepicker-addon.css' />
+		<link rel="stylesheet" type='text/css' href="css/jquery-ui.css" />
+		<link rel='stylesheet' type='text/css' href='css/calorg.css' />
+
+		<script type='text/javascript' src="js/pub.js"></script>
+		<script type='text/javascript' src="js/jquery-1.8.3.js"></script>
+		<script type='text/javascript' src="js/jquery.sha256.min.js"></script>
+		<script type='text/javascript' src="js/jquery.base64.min.js"></script>
+		<script type='text/javascript' src='fullcalendar/fullcalendar.min.js'></script>
+		<script type='text/javascript' src='js/sjcl.js'></script>
+		<script type='text/javascript' src="js/jquery-ui.js"></script>
+		<script type='text/javascript' src='js/jquery-ui-timepicker-addon.js'></script>
+		<script type='text/javascript' src='js/calorg.js'></script>
+	</head>
+
+	<body>
+
+		<div id="prompt">
+			<span id="prompt_title"></span><br/>
+			<input type="text" id="prompt_start"/>
+			<input type="text" id="prompt_stop"/>
+			<br/>
+			<input type="checkbox" value="0" id="prompt_allday">
+			<input type="text" id="prompt_title_input"/>
+			<button id="prompt_button" onclick=""></button>
+			<button id="prompt_button_close" onclick="hide_prompt(function(){});">Close</button>
+			<button id="prompt_button_delete" onclick="">Delete</button>
+		</div>
+
+		<div id="cal_headers">
+			<button onclick="$('#calendar').fullCalendar('prev');"> &nbsp;&#9668;&nbsp;</button>
+			<button onclick="$('#calendar').fullCalendar('next');"> &nbsp;&#9658;&nbsp;</button>
+			<br/>
+			<button onclick="$('#calendar').fullCalendar('today');"> &nbsp;&#9650;&nbsp;</button>
+		</div>
+
+
+		<div id='wrap'>
+			<div id='external-events' class="contenu">  
+				<input type='checkbox' checked="true" id='drop-remove' /> <label for='drop-remove'>uniq</label>
+				<button onclick='display_prompt({title: "Task title : ", title_input: "", button: "Save", call: task_add});'> Add</button>
+				<div id="todo"></div>
+			</div>  
+
+			<div id='calendar'></div>
+
+			<div id='loading' style='display:none'>loading...</div>
+		</div>
+
+
+		<div id='div_password'><input id="user_password" type="password"/></div>
+
+		<div id="cal_footer">
+			<button onclick="$('#calendar').fullCalendar( 'changeView', 'agendaDay' );">Jour</button>
+			<button onclick="$('#calendar').fullCalendar( 'changeView', 'agendaWeek' );">Semaine</button>
+			<button onclick="$('#calendar').fullCalendar( 'changeView', 'month' );">Mois</button>
+		</div>
+
+		<script>
+
+			$("#user_password").keyup(function(event){
+				if(event.keyCode == 13){
+					password = document.getElementById("user_password").value;
+					try
+					{
+						secret = $.sha256(sjcl.decrypt(password, pub));
+					} catch (error)
+					{
+						//red_light();
+					}
+
+					document.getElementById("div_password").style.visibility = 'hidden';
+
+					tasks_load();
+					calendar_init();
+					events_load();
+
+				}
+			});
+
+			$('#prompt_start').datetimepicker({ });
+			$('#prompt_stop').datetimepicker({ });
+
+		</script>
+
+	</body>
+</html>

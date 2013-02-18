@@ -1,0 +1,82 @@
+<html>
+<head>
+<script type='text/javascript' src='js/sjcl.js'></script>
+<script type='text/javascript' src="js/jquery-1.8.3.js"></script>
+<script type='text/javascript' src="js/jquery.sha256.min.js"></script>
+</head>
+<body>
+<div id='div_password'>
+Hello,
+<br/><br/>
+To init Calorg, enter your password, press enter, and follow instructions.<br/>
+<input id="user_password" type="password"/></div>
+<div id="div_init" style="visibility: hidden;">
+	<br/>
+	<br/>
+	To init Calorg, please follow instructions : 
+	<br/>
+	<br/>
+	1 Create new file <b>js/pub.js</b> with this content (one line) : 
+	<div id="pub"></div>
+	<br/>
+	<br/>
+	2 Create new file <b>hash.php</b> with this content : 
+	<div id="hash"></div>
+	<br/>
+	<br/>
+	3 Assert that your webservice can write on files in <b>json/</b> directory. Usually : <b>chown -R www-data.www-data json/</b>
+</div>
+
+
+
+<script>
+
+// password function from http://www.javascriptbank.com/use-jquery-to-generate-random-strings.html/en/
+function fct_password(length, special) {
+  var iteration = 0;
+  var password = "";
+  var randomNumber;
+
+  if(special == undefined){
+      var special = false;
+  }
+
+  while(iteration < length){
+    randomNumber = (Math.floor((Math.random() * 100)) % 94) + 33;
+    if(!special){
+      if ((randomNumber >=33) && (randomNumber <=47)) { continue; }
+      if ((randomNumber >=58) && (randomNumber <=64)) { continue; }
+      if ((randomNumber >=91) && (randomNumber <=96)) { continue; }
+      if ((randomNumber >=123) && (randomNumber <=126)) { continue; }
+    }
+    iteration++;
+    password += String.fromCharCode(randomNumber);
+  }
+  return password;
+}
+
+
+
+$("#user_password").keyup(function(event){
+		if(event.keyCode == 13){
+
+			password = document.getElementById("user_password").value;
+			var secret = fct_password(30);
+			
+			pub = sjcl.encrypt(password, secret);
+			hash = $.sha256(secret);;
+
+			document.getElementById("div_password").style.visibility = 'hidden';
+			document.getElementById("div_init").style.visibility = 'visible';
+
+			document.getElementById("pub").innerHTML = "pub = '"+pub+"';";
+			document.getElementById("hash").innerHTML = '&lt;?php return "'+hash+'"; ?&gt;';
+		}
+});
+
+
+</script>
+
+
+</body>
+</html>
